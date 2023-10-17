@@ -13,9 +13,6 @@ public class Job {
     private PositionType positionType;
     private CoreCompetency coreCompetency;
 
-    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
-    //  other five fields. The second constructor should also call the first in order to initialize
-    //  the 'id' field.
     public Job() {
         id = nextId;
         nextId++;
@@ -29,9 +26,6 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
-
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
 
     public String getName() {
         return name;
@@ -77,9 +71,6 @@ public class Job {
         return id;
     }
 
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,4 +83,33 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id, name, employer, location, positionType, coreCompetency);
     }
+
+    @Override
+    public String toString() {
+        String newline = System.lineSeparator();
+
+        if(this.name == null || this.name.isEmpty()) {
+            this.name = "Data not available";
+        }
+        if(this.employer.getValue() == null || this.employer.getValue().isEmpty()) {
+            this.employer.setValue("Data not available");
+        }
+        if(this.location.getValue() == null || this.location.getValue().isEmpty()) {
+            this.location.setValue("Data not available");
+        }
+        if(this.positionType.getValue() == null || this.positionType.getValue().isEmpty()) {
+            this.positionType.setValue("Data not available");
+        }
+        if(this.coreCompetency.getValue() == null || this.coreCompetency.getValue().isEmpty()) {
+            this.coreCompetency.setValue("Data not available");
+        }
+
+        return newline + "ID: " + this.id + newline +
+                "Name: " + this.name + newline
+                +"Employer: " + this.employer + newline +
+                "Location: " + this.location + newline +
+                "Position Type: " + this.positionType + newline +
+                "Core Competency: " + this.coreCompetency + newline;
+    }
 }
+

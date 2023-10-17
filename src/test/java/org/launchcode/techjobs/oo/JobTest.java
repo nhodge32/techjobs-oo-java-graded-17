@@ -50,4 +50,25 @@ public class JobTest {
         assertFalse(isEqual);
         //assertNotEquals(job1, job2); what is the difference between these 2 approaches
     }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job job = new Job();
+        assertEquals(job.toString(), System.lineSeparator() + job.getId() + System.lineSeparator());
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        assertEquals(job.toString(), System.lineSeparator() + "ID: " + job.getId() + "\nName: " + job.getName() +
+                "\nEmployer: " + job.getEmployer() + "\nLocation: " + job.getLocation() + "\nPosition Type: " + job.getPositionType() +
+                "\nCore Competency: " + job.getCoreCompetency() + System.lineSeparator());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+        assertEquals(job.toString(), System.lineSeparator() + "ID: " + job.getId() + "\nName: Data not available\nEmployer: Data not available" +
+                "\nLocation: Data not available\nPosition Type: Data not available\nCore Competency: Data not available" + System.lineSeparator());
+    }
 }
